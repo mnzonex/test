@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment | KILLERS VIP</title>
+  <link rel="icon" href="images/apple.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/plans.css">
+  <style>
+    .payment-section {
+      padding: 120px 0 80px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .payment-card {
+      background: var(--glass);
+      border: 1px solid var(--bd);
+      border-radius: var(--R);
+      padding: 40px;
+      width: 100%;
+      max-width: 600px;
+      text-align: left;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .payment-card h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--or);
+      text-align: center;
+    }
+    .payment-summary {
+      background: var(--bg2);
+      border: 1px solid var(--bd2);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .payment-summary h3 {
+      font-size: 1.2rem;
+      color: var(--tx);
+    }
+    .payment-summary p {
+      color: var(--tx2);
+      font-size: 0.9rem;
+    }
+    .price-tag {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--or);
+    }
+    .bank-details-wrapper {
+      margin-bottom: 30px;
+    }
+    .bank-card {
+      background: var(--soft);
+      border: 1px solid var(--bd);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    .bank-card h4 {
+      color: var(--or);
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .detail-label {
+      color: var(--tx2);
+    }
+    .detail-value {
+      font-weight: 600;
+      color: var(--tx);
+    }
+    .copy-btn {
+      background: transparent;
+      color: var(--or);
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: color var(--T);
+    }
+    .copy-btn:hover {
+      color: #fff;
+    }
+    .whatsapp-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    }
+    .whatsapp-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+      color: white;
+    }
+    .loading-state {
+      text-align: center;
+      padding: 40px;
+    }
+    .spinner {
+      border: 4px solid var(--soft);
+      border-top: 4px solid var(--or);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header id="site-header">
+    <div class="hdr-inner">
+      <a href="index.html" class="logo-wrap">
+        <img src="assets/logo.jpg" class="logo-img" alt="Killers VIP">
+        <span class="brand-txt">KILLERS <em>VIP</em></span>
+      </a>
+      <a href="plans.html" class="btn btn-ghost" style="padding: 8px 16px;"><i class="fas fa-arrow-left"></i> Back</a>
+    </div>
+  </header>
+
+  <section class="payment-section">
+    <div class="section-wrap" style="width: 100%; display: flex; justify-content: center;">
+      <div class="payment-card" id="paymentCard">
+        <div class="loading-state" id="loadingState">
+          <div class="spinner"></div>
+          <p>Loading payment details...</p>
+        </div>
+        
+        <div id="paymentContent" style="display: none;">
+          <h1><i class="fas fa-lock"></i> Secure Payment</h1>
+          
+          <div class="payment-summary">
+            <div>
+              <h3 id="pkgName">VIP Package Name</h3>
+              <p>Promo Code: <span id="promoCodeDisplay" style="color: var(--or); font-weight: 600;"></span></p>
+            </div>
+          </div>
+          
+          <h3 style="margin-bottom: 15px; color: var(--tx);">Payment Methods</h3>
+          <p style="color: var(--tx2); margin-bottom: 20px; font-size: 0.9rem;">Please send the payment to one of the following accounts and send a screenshot of the receipt via WhatsApp.</p>
+          
+          <div class="bank-details-wrapper" id="bankDetailsContainer">
+            <!-- Bank details fetched from DB will go here -->
+          </div>
+          
+          <a href="#" id="whatsappLink" class="btn whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Send Receipt on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/payment.js"></script>
+</body>
+</html>
