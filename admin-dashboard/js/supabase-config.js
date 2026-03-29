@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════
-// SUPABASE CONFIGURATION — KILLERS VIP (Public Website)
+// ADMIN DASHBOARD — SUPABASE CONFIGURATION
 // Add your Supabase URL and Anon Key here
 // ═══════════════════════════════════════════════════════════
 
@@ -60,10 +60,65 @@ async function getAllPackages() {
   return data;
 }
 
+async function updatePackageLinks(packageId, links) {
+  if (!supabaseClient) throw new Error("Supabase is not configured.");
+  const { error } = await supabaseClient
+    .from('packages')
+    .update({ links })
+    .eq('id', packageId);
+  if (error) throw error;
+}
+
+async function getAllPromoCodes() {
+  if (!supabaseClient) throw new Error("Supabase is not configured.");
+  const { data, error } = await supabaseClient
+    .from('promo_codes')
+    .select('*, bank_details(*)')
+    .order('usage_count', { ascending: false });
+  if (error) throw error;
+  return data;
+}
+
+async function savePromoCodeToDB(promoData, bankDetailsArray) {
+  if (!supabaseClient) throw new Error("Supabase is not configured.");
+  let promoId;
+  
+  if (promoData.id) {
+    const { data, error } = await supabaseClient
+      .from('promo_codes')
+      .update({ code: promoData.code.trim().toUpperCase(), is_default: promoData.is_default })
+      .eq('id', promoData.id)
+      .select().single();
+    if (error) throw error;
+    promoId = data.id;
+    await supabaseClient.from('bank_details').delete().eq('promo_code_id', promoId);
+  } else {
+    if (promoData.is_default) {
+      await supabaseClient.from('promo_codes').update({ is_default: false }).eq('is_default', true);
+    }
+    const { data, error } = await supabaseClient
+      .from('promo_codes')
+      .insert([{ code: promoData.code.trim().toUpperCase(), is_default: promoData.is_default }])
+      .select().single();
+    if (error) throw error;
+    promoId = data.id;
+  }
+
+  if (bankDetailsArray.length > 0) {
+    const bankRows = bankDetailsArray.map(b => ({ ...b, promo_code_id: promoId }));
+    const { error: bankErr } = await supabaseClient.from('bank_details').insert(bankRows);
+    if (bankErr) throw bankErr;
+  }
+  return promoId;
+}
+
 // Global API
 window.db = {
   getPromoCodeDetails,
   getDefaultPromoCode,
   getPackageDetails,
-  getAllPackages
+  getAllPackages,
+  updatePackageLinks,
+  getAllPromoCodes,
+  savePromoCodeToDB
 };

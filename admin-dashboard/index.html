@@ -187,7 +187,6 @@
       <nav>
         <a class="nav-item active" onclick="switchTab('packages', this)"><i class="fas fa-box"></i> Manage Packages</a>
         <a class="nav-item" onclick="switchTab('promocodes', this)"><i class="fas fa-ticket-alt"></i> Promo Codes & Banks</a>
-        <a class="nav-item" onclick="switchTab('signals', this)"><i class="fas fa-broadcast-tower"></i> Push Signals</a>
         <a class="nav-item" onclick="switchTab('leaderboard', this)"><i class="fas fa-chart-line"></i> Marketing Leaderboard</a>
         <a class="nav-item" style="margin-top: auto; color: var(--danger)" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
       </nav>
@@ -266,33 +265,7 @@
         </div>
       </section>
 
-      <!-- Signals Tab -->
-      <section id="signals" class="tab-section">
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title"><i class="fas fa-broadcast-tower"></i> Manage Signals & Notifications</h3>
-            <div class="flex-row">
-              <button class="btn btn-sm btn-outline" onclick="openSignalModal('notification')"><i class="fas fa-comment-dots"></i> Push Notification</button>
-              <button class="btn btn-sm btn-primary" style="color:#000;" onclick="openSignalModal('signal')"><i class="fas fa-bolt"></i> Push Trade Signal</button>
-            </div>
-          </div>
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Type</th>
-                  <th>Details</th>
-                  <th>Time sent</th>
-                  <th class="text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="signalsTableBody">
-                <!-- Signals JS populated here -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
+<div id="spacer-after-leaderboard" style="height: 40px;"></div>
 
     </main>
   </div>
@@ -332,84 +305,22 @@
       
       <div style="border-top:1px solid var(--border); padding-top:20px; margin-top:20px;">
         <h4 style="margin-bottom:15px; color:var(--primary);">Attached Payment Details</h4>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">Add bank accounts, Binance Pay ID, or any crypto wallet details below.</p>
         <div id="promoBanksContainer">
           <!-- Bank cards JS populated here -->
         </div>
-        <button class="btn btn-sm btn-outline mb-3" onclick="addBankForm()"><i class="fas fa-plus"></i> Add Bank/Binance Account</button>
+        <button class="btn btn-sm btn-outline mb-3" onclick="addBankForm()"><i class="fas fa-plus"></i> Add Bank / Binance / Crypto Wallet</button>
       </div>
       
       <button class="btn btn-primary mt-3" onclick="savePromoCode()">Save Promo Code</button>
     </div>
   </div>
 
-  <!-- Signal Push Modal -->
-  <div class="modal" id="signalModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="signalModalTitle">Push Message</h3>
-        <button class="btn btn-outline btn-sm" onclick="closeModal('signalModal')"><i class="fas fa-times"></i></button>
-      </div>
-      <input type="hidden" id="editingSignalId">
-      <input type="hidden" id="signalType">
-      
-      <div id="tradeSignalFields" style="display:none; margin-bottom:15px; border-bottom:1px solid var(--border); padding-bottom:15px;">
-        <div class="grid grid-2 mb-3">
-          <div class="form-group mb-0">
-            <label>Market</label>
-            <select id="sigMarket" class="form-control" style="background:var(--input-bg); color:var(--text); padding:10px;">
-              <option value="CRYPTO">Crypto</option>
-              <option value="FOREX">Forex</option>
-            </select>
-          </div>
-          <div class="form-group mb-0">
-            <label>Direction</label>
-            <select id="sigDirection" class="form-control" style="background:var(--input-bg); color:var(--text); padding:10px;">
-              <option value="LONG">Long</option>
-              <option value="SHORT">Short</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="grid grid-2 mb-3">
-           <div class="form-group mb-0">
-            <label>Coin / Pair</label>
-            <input type="text" id="sigPair" class="form-control" placeholder="BTC/USDT">
-          </div>
-          <div class="form-group mb-0">
-            <label>Leverage</label>
-            <input type="text" id="sigLeverage" class="form-control" placeholder="20x">
-          </div>
-        </div>
-        
-        <div class="grid grid-2 mb-3">
-           <div class="form-group mb-0">
-            <label>Entry Price</label>
-            <input type="text" id="sigEntry" class="form-control" placeholder="60000">
-          </div>
-          <div class="form-group mb-0">
-            <label>Take Profit (TP)</label>
-            <input type="text" id="sigTp" class="form-control" placeholder="62000">
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label>Stop Loss (SL)</label>
-          <input type="text" id="sigSl" class="form-control" placeholder="58000">
-        </div>
-      </div>
-      
-      <div class="form-group">
-        <label>Message / Notes</label>
-        <textarea id="sigMessage" class="form-control" rows="3" placeholder="Enter message..."></textarea>
-      </div>
-      
-      <button class="btn btn-primary mt-3" onclick="saveSignal()">Push Over Realtime <i class="fas fa-paper-plane"></i></button>
-    </div>
-  </div>
+<!-- Modal Section Ends -->
 
   <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="../killersvip-main/js/supabase-config.js"></script>
+  <script src="js/supabase-config.js"></script>
   <!-- Admin Script -->
   <script src="js/admin.js"></script>
 </body>

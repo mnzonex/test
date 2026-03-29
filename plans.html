@@ -14,7 +14,6 @@
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/plans.css">
-  <link rel="stylesheet" href="css/notifications.css">
 </head>
 
 <body>
@@ -33,10 +32,6 @@
         <a href="index.html" class="nav-link"><i class="fas fa-home"></i> Home</a>
         <a href="plans.html" class="nav-link is-active"><i class="fas fa-crown"></i> Plans</a>
         <a href="support-contact.html" class="nav-link"><i class="fas fa-headset"></i> Contact</a>
-        <button class="nav-link" id="bellBtn" style="background:transparent; border:none; cursor:pointer; color:var(--tx2); font-size:1.1rem; position:relative;" aria-label="Notifications">
-          <i class="fas fa-bell"></i>
-          <span id="bellBadge" style="position:absolute; top:-5px; right:-10px; background:var(--or); color:#000; font-size:0.65rem; padding:2px 6px; border-radius:10px; font-weight:bold; display:none;">0</span>
-        </button>
       </nav>
     </div>
   </header>
@@ -72,7 +67,7 @@
             <span class="amt">40</span><span class="cur"> USDT</span>
             <span class="per">/ Lifetime</span>
           </div>
-          <div class="group-links" id="group-links-crypto"></div>
+          <div class="group-links-container" id="group-links-crypto"></div>
           <button onclick="openPromoModal('crypto')" class="btn btn-primary">Buy Now <i class="fas fa-shopping-cart"></i></button>
         </div>
 
@@ -95,7 +90,7 @@
             <span class="amt">40</span><span class="cur"> USDT</span>
             <span class="per">/ Lifetime</span>
           </div>
-          <div class="group-links" id="group-links-forex"></div>
+          <div class="group-links-container" id="group-links-forex"></div>
           <button onclick="openPromoModal('forex')" class="btn btn-primary">Buy Now <i class="fas fa-shopping-cart"></i></button>
         </div>
 
@@ -117,7 +112,7 @@
             <span class="amt">60</span><span class="cur"> USDT</span>
             <span class="per">/ Lifetime</span>
           </div>
-          <div class="group-links" id="group-links-all-in-one"></div>
+          <div class="group-links-container" id="group-links-all-in-one"></div>
           <button onclick="openPromoModal('all')" class="btn btn-primary pulse">Buy Now <i class="fas fa-shopping-cart"></i></button>
         </div>
 
@@ -125,7 +120,7 @@
     </div>
   </section>
 
-  <!-- FREE PLANS -->
+  <!-- FREE PLANS — No promo code needed, direct join -->
   <section class="free-section">
     <div class="section-wrap">
       <div class="free-head">
@@ -145,8 +140,10 @@
             <li><i class="fas fa-check green-i"></i> WhatsApp &amp; Telegram</li>
             <li><i class="fas fa-check green-i"></i> No Payment Required</li>
           </ul>
-          <div class="group-links" id="group-links-free"></div>
-          <button onclick="openPromoModal('free')" class="btn btn-green">Join Free <i class="fas fa-arrow-right"></i></button>
+          <!-- Free group links displayed as beautiful buttons — loaded by JS -->
+          <div class="free-group-buttons" id="free-group-buttons">
+            <div class="group-loading"><i class="fas fa-spinner fa-spin"></i> Loading free groups...</div>
+          </div>
         </div>
       </div>
     </div>
@@ -174,7 +171,7 @@
       </div>
       <div class="ft-col">
         <h4>Plans</h4>
-        <a href="plans.html">Crypto VIP — 30 USDT</a>
+        <a href="plans.html">Crypto VIP — 40 USDT</a>
         <a href="plans.html">Forex VIP — 40 USDT</a>
         <a href="plans.html">All-in-One — 60 USDT</a>
         <a href="plans.html">Free Signals</a>
@@ -185,7 +182,7 @@
     </div>
   </footer>
 
-  <!-- PROMO CODE MODAL -->
+  <!-- PROMO CODE MODAL (only for paid plans) -->
   <div id="promoModal" class="modal-overlay">
     <div class="modal-content">
       <span class="close-modal" onclick="closePromoModal()"><i class="fas fa-times"></i></span>
@@ -196,16 +193,18 @@
       </div>
       <div class="modal-btns">
         <button class="btn btn-primary" onclick="submitPromoCode()">Submit</button>
-        <button class="btn btn-ghost" onclick="useDefaultPromoCode()">Use Default Promo Code</button>
+        <button class="btn btn-ghost" onclick="useDefaultPromoCode()">Continue without Promo Code</button>
       </div>
     </div>
   </div>
+
+  <!-- Error Toast Container -->
+  <div id="toastContainer" class="toast-container"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-config.js"></script>
   <script src="js/plans.js"></script>
   <script src="js/killers.js"></script>
-  <script src="js/notifications.js"></script>
 </body>
 
 </html>
