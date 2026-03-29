@@ -4,7 +4,7 @@
 // ═══════════════════════════════════════════════════════════
 
 const SUPABASE_URL = 'https://lejavosqltjokxginkcf.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxlamF2b3NxbHRqb2t4Z2lua2NmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4MDExNDksImV4cCI6MjA5MDM3NzE0OX0.xjJXWJfgtkG_njsaDUIaW2vM4o7p9-2ME9ljf4F-MbA';
 
 let supabaseClient = null;
 
