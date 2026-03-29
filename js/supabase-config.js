@@ -3,13 +3,13 @@
 // Add your Supabase URL and Anon Key here
 // ═══════════════════════════════════════════════════════════
 
-const SUPABASE_URL = 'YOUR_SUPABASE_URL_HERE';
+const SUPABASE_URL = 'https://lejavosqltjokxginkcf.supabase.co';
 const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
 
 let supabaseClient = null;
 
 try {
-  if (SUPABASE_URL !== 'YOUR_SUPABASE_URL_HERE' && typeof supabase !== 'undefined') {
+  if (SUPABASE_URL !== 'https://lejavosqltjokxginkcf.supabase.co' && typeof supabase !== 'undefined') {
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   }
 } catch (e) { console.error("Supabase init error:", e); }
