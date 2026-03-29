@@ -4,7 +4,7 @@
 // ═══════════════════════════════════════════════════════════
 
 const SUPABASE_URL = 'https://bonpneqrztuwljzdwttv.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY_HERE';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJvbnBuZXFyenR1d2xqemR3dHR2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3OTM1NzMsImV4cCI6MjA5MDM2OTU3M30.a4Dcpu0MZUyyN2CYIHqVH2uEX5o5wdC4zExZUGuSGeU';
 
 let supabaseClient = null;
 
